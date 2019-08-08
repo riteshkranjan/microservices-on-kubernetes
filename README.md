@@ -8,6 +8,22 @@ Here I assume that you already have a real Kubernetes cluster up and running (I 
 
 All yaml files are inside the "kubernetes" folder
 
+## Installation steps:
+
+1 Install Minikube:  https://github.com/kubernetes/minikube/releases 
+
+2 install kubectl : https://kubernetes.io/docs/tasks/tools/install-kubectl/
+
+3 add both the paths to environment variables:
+
+## In case dashboard doesnot launch
+1. run : kubectl create clusterrolebinding kube-system-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default
+clusterrolebinding.rbac.authorization.k8s.io/kube-system-cluster-admin created
+2. note down dashboard pod using : kubectl get pods --all-namespaces
+3. delete this pod using command : kubectl delete  pod <podname> -n kube-system
+4. re-run this command and verify dashboard is running now :  kubectl get pods --all-namespaces 
+https://kubernetes.io/docs/tasks/tools/install-kubectl/ 
+ 
 
 
 # How to run this demo:
