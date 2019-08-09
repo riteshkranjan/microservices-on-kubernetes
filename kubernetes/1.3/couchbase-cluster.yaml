@@ -56,6 +56,6 @@ spec:
       services:
         - index
     - size: 1
-      name: index_services
+      name: query_services
       services:
-        - index
+        - query
