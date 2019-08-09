@@ -1,14 +1,20 @@
 apiVersion: couchbase.com/v1
 kind: CouchbaseCluster
 metadata:
-  name: cb-example
+  name: cb-viride-acme
 spec:
   baseImage: couchbase/server
   version: enterprise-6.0.1
-  authSecret: cb-example-auth
+  paused: false
+  antiAffinity: true
+  authSecret: cb-viride-acme-auth
   exposeAdminConsole: true
   adminConsoleServices:
     - data
+  exposedFeatures:
+    - xdcr
+  logRetentionTime: 604800s
+  logRetentionCount: 20
   cluster:
     dataServiceMemoryQuota: 256
     indexServiceMemoryQuota: 256
@@ -22,7 +28,7 @@ spec:
     autoFailoverOnDataDiskIssuesTimePeriod: 120
     autoFailoverServerGroup: false
   buckets:
-    - name: couchbase-sample
+    - name: cb-viride-acme-bucket
       type: couchbase
       memoryQuota: 128
       replicas: 1
@@ -32,7 +38,7 @@ spec:
       enableFlush: true
       enableIndexReplica: false
   servers:
-    - size: 3
+    - size: 1
       name: all_services
       services:
         - data
@@ -41,3 +47,15 @@ spec:
         - search
         - eventing
         - analytics
+    - size: 2
+      name: data_services
+      services:
+        - data
+    - size: 1
+      name: index_services
+      services:
+        - index
+    - size: 1
+      name: index_services
+      services:
+        - index
