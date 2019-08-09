@@ -1,0 +1,24 @@
+1. K8s Autoscaling - 
+	a) Creation of new pod 
+
+2. K8s Failover
+	a) Delete one K8s node, should create new node and couchbase pods
+	
+3. Couchbase Cluster Autoscaling
+	a) Creation of new pod
+		I) yaml upgrade
+		ii) UI
+
+4. Couchbase Cluster Failover	
+	a) Delete one Pod, should create new pod. [ DONE] 
+	
+5. XDCR
+
+6. 85% auto failover
+		snapshot, rebalance, jmeter
+
+7. Disk issue failover
+
+8. Persistence storage -- prove
+
+9. Persistence logs
