@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>All About Beers</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+
+<body background="bg.jpg">
+	<div class="container my-2">
+		<div class="card">
+			<div class="card-body">
+				<div class="container my-5">
+					<div class="row">
+						<p class="my-5">
+							<div class="col-2">
+						<a href="/edit" class="btn btn-default"> <i
+								class="fa fa-plus-square" aria-hidden="true"> Add Beer </i></a>
+					</div>
+					<div class="col-2">
+						<a href="/bulkAdd" class="btn btn-default"> <i
+							class="fa fa-cog"> Bulk Add </i></a>
+					</div>
+					<div class="col-2">
+						<a href="/bulkDelete" class="btn btn-default"> <i
+							class="fa fa-trash"> Bulk Delete </i></a>
+					</div>
+					<div class="col-6">
+							<form action="#" th:action="@{/search}">
+								<label for="search_input">Search ID:</label> <input
+									name="brewery_id" id="brewery_id"> <input type="submit"
+									class="btn btn-primary" value=" Search ">
+							</form>
+						</div>
+						
+					</div>
+
+
+
+					<div class="col-md-10">
+						<h2 th:if="${beers == null || beers.isEmpty()}">No record
+							found !!</h2>
+						<div th:if="${beers != null && !beers.isEmpty()}">
+							<table class="table table-striped table-responsive-md">
+								<thead>
+									<tr>
+										<th>Brewery Id</th>
+										<th>Category</th>
+										<th>Description</th>
+										<th>Name</th>
+										<th>Style</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="beer : ${beers.content}">
+										<td th:text="${beer.brewery_id}"></td>
+										<td th:text="${beer.category}"></td>
+										<td th:text="${beer.description}"></td>
+										<td th:text="${beer.name}"></td>
+										<td th:text="${beer.style}"></td>
+										<td><a
+											th:href="@{/edit/{brewery_id}(brewery_id=${beer.brewery_id})}"
+											class="btn btn-default"> <i class="fa fa-cog"
+												aria-hidden="true"></i>
+										</a></td>
+										<td><a class="btn btn-default"
+											th:href="@{/delete/{brewery_id}(brewery_id=${beer.brewery_id})}"
+											aria-label="Delete"> <i class="fa fa-trash"
+												aria-hidden="true"></i>
+
+										</a></td>
+
+									</tr>
+								</tbody>
+							</table>
+							<nav aria-label="Pagination" th:if="${beers.totalPages gt 0}">
+								<ul class="pagination justify-content-center font-weight-medium">
+									<li class="page-item"
+										th:classappend="${beers.number eq 0} ? 'disabled'"><a
+										class="page-link svg-icon"
+										th:href="@{/?page={id}(id=${beers.number lt 2 ? 1 : beers.number})}"
+										aria-label="Previous" title="Previous Page" rel="tooltip">
+											<span aria-hidden="true" data-feather="chevrons-left"></span>
+									</a></li>
+									<li class="page-item"
+										th:classappend="${i eq beers.number + 1} ? 'active'"
+										th:each="i : ${#numbers.sequence( beers.number + 1, beers.totalPages > 10 + beers.number ? beers.number + 10 : beers.totalPages, 1)}">
+										<a class="page-link" th:href="@{/?page={id}(id=${i})}"
+										th:text="${i}" th:title="${'Page '+ i}" rel="tooltip"></a>
+									</li>
+									<li class="page-item disabled"
+										th:if="${beers.number + 10 < beers.totalPages}"><a
+										class="page-link svg-icon" href="#"> <span
+											data-feather="more-horizontal"></span>
+									</a></li>
+									<li class="page-item"
+										th:classappend="${beers.number + 1 eq beers.totalPages} ? 'disabled'">
+										<a class="page-link svg-icon"
+										th:href="@{/?page={id}(id=${beers.number + 2})}"
+										aria-label="Next" title="Next Page" rel="tooltip"> <span
+											aria-hidden="true" data-feather="chevrons-right"></span>
+									</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
