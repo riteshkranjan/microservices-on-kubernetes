@@ -5,16 +5,16 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: spring-boot-app
+      app: viride-acme-app
   replicas: 1 # tells deployment to run 3 pods matching the template
   template: # create pods using pod definition in this template
     metadata:
       labels:
-        app: spring-boot-app
+        app: viride-acme-app
     spec:
       containers:
-      - name: spring-boot-app
-        image: gcr.io/hackathoncouchbase-<id>/viride-acme-app
+      - name: viride-acme-app
+        image: gcr.io/hackathoncouchbase/viride-acme-app
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

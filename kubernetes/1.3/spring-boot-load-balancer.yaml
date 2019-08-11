@@ -11,5 +11,5 @@ spec:
     targetPort: 8081
     name: management
   selector:
-    app: spring-boot-app
+    app: viride-acme-app
   type: LoadBalancer
