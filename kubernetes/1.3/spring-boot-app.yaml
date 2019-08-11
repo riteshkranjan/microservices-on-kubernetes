@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: riteshkranjan/viride-acme-app
+        image: gcr.io/hackathoncouchbase-<id>/viride-acme-app
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
